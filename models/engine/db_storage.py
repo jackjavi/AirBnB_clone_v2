@@ -14,7 +14,7 @@ from models.amenity import Amenity
 
 
 class DBStorage:
-    """create tables in environmental"""
+    """ create tables in environmental"""
     __engine = None
     __session = None
 
@@ -30,7 +30,7 @@ class DBStorage:
                                       pool_pre_ping=True)
 
         if env == "test":
-            Bse.metadata.drop_all(self.__engine)
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """returns a dictionary
@@ -55,9 +55,9 @@ class DBStorage:
         return (dic)
 
     def new(self, obj):
-        """add a new emlement in the table
+        """add a new element in the table
         """
-        self.___session.add(obj)
+        self.__session.add(obj)
 
     def save(self):
         """save changes

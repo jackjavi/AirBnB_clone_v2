@@ -14,7 +14,7 @@ place_amenity = Table("place_amenity", Base.metadata,
                              primary_key=True,
                              nullable=False),
                       Column("amenity_id", String(60),
-                             ForeignKey("amenites.id"),
+                             ForeignKey("amenities.id"),
                              primary_key=True,
                              nullable=False))
 
@@ -23,14 +23,14 @@ class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
         city_id: city id
-        user_id: usser id
+        user_id: user id
         name: name input
-        desscription: string of description
+        description: string of description
         number_rooms: number of room in int
         number_bathrooms: number of bathrooms in int
         max_guest: maximum guest in int
-        price_by_night: price for statying in int
-        latitude: latitude in float
+        price_by_night:: pice for a staying in int
+        latitude: latitude in flaot
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
@@ -79,5 +79,5 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, obj=None):
             """ Appends amenity ids to the attribute """
-            if type(obj) is Ameity and obj.id not in self.amenity_ids:
+            if type(obj) is Amenity and obj.id not in self.amenity_ids:
                 self.amenity_ids.append(obj.id)

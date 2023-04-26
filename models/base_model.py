@@ -11,7 +11,7 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """This class will define all common attributes/methods
+    """This class will defines all common attributes/methods
     for other classes
     """
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
@@ -34,15 +34,15 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
-                if "id" not in kwargs:
-                    self.id = str(uuid.uuid4())
-                if "created_at" not in kwargs:
-                    self.created_at = datetime.now()
-                if "updated_at" not in kwargs:
-                    self.updated_at = datetime.now()
-            else:
+            if "id" not in kwargs:
                 self.id = str(uuid.uuid4())
-                self.created_at = self.updated_at = datetime.now()
+            if "created_at" not in kwargs:
+                self.created_at = datetime.now()
+            if "updated_at" not in kwargs:
+                self.updated_at = datetime.now()
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
         """returns a string
@@ -50,10 +50,10 @@ class BaseModel:
             returns a string of class name, id, and dictionary
         """
         return "[{}] ({}) {}".format(
-                type(self).__name__, self.id, self.__dict__)
+            type(self).__name__, self.id, self.__dict__)
 
     def __repr__(self):
-        """return a string representation
+        """return a string representaion
         """
         return self.__str__()
 
@@ -65,7 +65,7 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """creates dictionary of the class and returns
+        """creates dictionary of the class  and returns
         Return:
             returns a dictionary of all the key values in __dict__
         """
@@ -78,6 +78,6 @@ class BaseModel:
         return my_dict
 
     def delete(self):
-        """delete object
+        """ delete object
         """
         models.storage.delete(self)

@@ -12,7 +12,7 @@ class User(BaseModel, Base):
     """This is the class for user
     Attributes:
         email: email address
-        password: password for you to login
+        password: password for you login
         first_name: first name
         last_name: last name
     """
